@@ -24,7 +24,10 @@ class Controller:
 # defines an interface for encapsulating the behavior associated
 # with a particular state of the Context
 #
-class State:
+class State(Controller):
+    def __init__(self):
+        Controller.__init__(self)
+        self.controller1=Controller()
     def handle(self):
         pass
 
@@ -34,22 +37,18 @@ class State:
 # each subclass implements a behavior associated with a state
 # of the Context
 #
-class ConcreteStateLogin(State,Controller):
+class ConcreteStateLogin(State):
     def __init__(self):
         State.__init__(self)
-        Controller.__init__(self)
-        self.controller1=Controller()
 
     def handle(self):
         self.controller1.view.loginPage()
         print("Login Displayed")
 
 
-class ConcreteStateProfile(State,Controller):
+class ConcreteStateProfile(State):
     def __init__(self):
         State.__init__(self)
-        Controller.__init__(self)
-        self.controller1 = Controller()
 
     def handle(self):
         self.controller1.view.profilePage()
@@ -80,6 +79,8 @@ if __name__ == '__main__':
     context = Context()
 
     context.setState(DisplayLogin)
+    context.request()
+    context.setState(DisplayProfile)
     context.request()
 
 
