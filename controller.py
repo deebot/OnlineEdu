@@ -1,25 +1,21 @@
 from model import Model
 from view import *
 
-
 class Controller:
     def __init__(self):
         self.model=Model()
         self.view=View(self)
 
-
-
-    def main(self):
-        print("In main of controller")
-        self.view.loginPage()
-
     def onButtonClick(self,caption):
-        if caption == "Button1":
-            print("hello")
+        if caption == "buttonSubmit":
+            print("got button Press info from view in Controller")
+            self.model.LoginID= self.view.LoginFrame.getEntryValue(0)
+            self.model.password=self.view.LoginFrame.getEntryValue(1)
+            print("Connecting and validating User in DataBase")
 
 
 
-#
+
 # State
 # defines an interface for encapsulating the behavior associated
 # with a particular state of the Context
@@ -30,8 +26,6 @@ class State(Controller):
         self.controller1=Controller()
     def handle(self):
         pass
-
-
 #
 # Concrete States
 # each subclass implements a behavior associated with a state
@@ -54,7 +48,6 @@ class ConcreteStateProfile(State):
         self.controller1.view.profilePage()
         print("Profile Page displayed")
 
-
 #
 # Context
 # defines the interface of interest to clients
@@ -69,19 +62,21 @@ class Context:
     def request(self):
         self._state.handle()
 
-
-
 if __name__ == '__main__':
     #myApp = Controller()
     #myApp.main()
     DisplayLogin = ConcreteStateLogin()
+    MyController = Controller()
     DisplayProfile = ConcreteStateProfile()
     context = Context()
-
+    print("-------------------------------Setting state to display Login Page ---------------------")
     context.setState(DisplayLogin)
     context.request()
-    context.setState(DisplayProfile)
-    context.request()
+
+
+
+    #context.setState(DisplayProfile)
+    #context.request()
 
 
 
