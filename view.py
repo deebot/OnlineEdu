@@ -86,6 +86,25 @@ class LeafEntry(Component):
         #print("Value is " + str(self._Evalue))
         return self._Evalue
 
+class LeafBanner(Component):
+    def __init__(self, alias):
+        Component.__init__(self)
+        self._alias = alias
+        self._Evalue="apple"
+
+    def operation(self):
+        #print("entry" + str(self._alias))
+        return "entry" + str(self._alias)
+
+    def setEntryValue(self,val):
+        self._Evalue=val
+        print("Value set to " + str(self._Evalue))
+
+    def getEntryValue(self):
+
+        #print("Value is " + str(self._Evalue))
+        return self._Evalue
+
 class View(Composite):
 
     def __init__(self,controller):
@@ -112,6 +131,12 @@ class View(Composite):
     def profilePage(self):
        # ProfileFrame =Composite()
         print("------------------------Composing Profile Screen-----------------------------")
+        self.LoginFrame.add(LeafBanner("Subject1"))
+        self.LoginFrame.add(LeafEntry("Subject2"))
+
+        simulate_ButtonPress = str(input("Add a new Course"))
+        if simulate_ButtonPress == "y":
+            self.controller.onButtonClick(self.LoginFrame.operation(2))
 
     def VideoConferencePage(self):
         pass
