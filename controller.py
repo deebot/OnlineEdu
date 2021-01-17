@@ -1,18 +1,21 @@
 from model import Model
-from view import *
+from model import Subscriber
+from view import View
+from model import Publisher
+
+
 
 class Controller:
     def __init__(self):
         self.model=Model()
         self.view=View(self)
+        print("Controller Class initiated")
+
 
     def onButtonClick(self,caption):
-        if caption == "buttonSubmit":
-            print("got button Press info from view in Controller")
-            self.model.LoginID= self.view.LoginFrame.getEntryValue(0)
-            self.model.password=self.view.LoginFrame.getEntryValue(1)
-            print("Connecting and validating User in DataBase")
-
+        self.model.pub.add_newsletter("Tech")
+        self.model.pub.register(newsletter="Tech", who=s1)
+        self.model.recogniseButton(caption)
 
 
 
@@ -65,18 +68,32 @@ class Context:
 if __name__ == '__main__':
     #myApp = Controller()
     #myApp.main()
-    DisplayLogin = ConcreteStateLogin()
     MyController = Controller()
     DisplayProfile = ConcreteStateProfile()
+    DisplayLogin = ConcreteStateLogin()
     context = Context()
-    print("-------------------------------Setting state to display Login Page ---------------------")
-    context.setState(DisplayLogin)
-    context.request()
+    s1 = Subscriber()
+    s1.addSubName("Tom")
+
+    state ="Login"
+
+    while(True):
+
+        print(state)
+        if state =="Login":
+            context.setState(DisplayLogin)
+            context.request()
+            print("-------------------------------Setting state to display Login Page ---------------------")
+            state = s1.get_data()
+            #print(f' In while loop{state} registered')
+
+        if state =="Profile":
+            context.setState(DisplayProfile)
+            context.request()
+            print("-------------------------------Setting state to display Profile Page ---------------------")
 
 
 
-    #context.setState(DisplayProfile)
-    #context.request()
 
 
 
