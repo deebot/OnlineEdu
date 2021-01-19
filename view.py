@@ -111,6 +111,9 @@ class View(Composite):
         self.controller=controller
         Composite.__init__(self)
         self.LoginFrame=Composite()
+        self.ProfileFrame=Composite()
+        self.AddCoursesFrame=Composite()
+        self.Courses=[]
 
     def attachButtonClick(self,x):
         self.controller.onButtonClick(x.operation())
@@ -131,19 +134,20 @@ class View(Composite):
     def profilePage(self):
        # ProfileFrame =Composite()
         print("------------------------Composing Profile Screen-----------------------------")
-        self.LoginFrame.add(LeafBanner("Subject1"))
-        self.LoginFrame.add(LeafEntry("Subject2"))
+        self.ProfileFrame.add(LeafBanner("Subject1"))
+        self.ProfileFrame.add(LeafBanner("Subject2"))
+        self.ProfileFrame.add(LeafButton("AddCourse"))
 
-        simulate_ButtonPress = str(input("Add a new Course"))
-        if simulate_ButtonPress == "y":
-            self.controller.onButtonClick(self.LoginFrame.operation(2))
+        simulate_Addcourse = str(input("Add a new Course"))
+        if simulate_Addcourse == "y":
+            print(self.ProfileFrame.operation(2))
+            self.controller.onButtonClick(self.ProfileFrame.operation(2))
 
-    def VideoConferencePage(self):
-        pass
+    def CoursesPage(self):
 
-if __name__ == "__main__":
-    pass
-   #main =App()
-  #  main.loginPage()
-
-
+        self.AddCoursesFrame.add(LeafBanner("Subject1"))
+        self.AddCoursesFrame.add(LeafBanner("Subject2"))
+        self.AddCoursesFrame.add(LeafButton("Select"))
+        print("---------Select One --------- ")
+        print("Subject3")
+        print("Subject4")

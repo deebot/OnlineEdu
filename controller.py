@@ -13,11 +13,17 @@ class Controller:
 
 
     def onButtonClick(self,caption):
-        self.model.pub.add_newsletter("Tech")
-        self.model.pub.register(newsletter="Tech", who=s1)
-        self.model.recogniseButton(caption)
-        if caption == "AddCourse":
+        if caption =="buttonSubmit":
+            self.model.pub.add_newsletter("Tech")
+            self.model.pub.register(newsletter="Tech", who=s1)
+            self.model.recogniseButton(caption)
+        if caption == "buttonAddCourse":
             print(f' Course Page {caption} registered')
+            self.model.recogniseButton(caption)
+        if caption == "buttonSelect":
+            print(f' Course Page {caption} registered')
+            self.model.SubjectsEnrolled.append()
+
 
 
 
@@ -56,6 +62,14 @@ class ConcreteStateProfile(State):
         self.controller1.view.profilePage()
         print("Profile Page displayed")
 
+class ConcreteStateAddCourse(State):
+    def __init__(self):
+        State.__init__(self)
+
+    def handle(self):
+        self.controller1.view.CoursesPage()
+        print("Courses Displayed")
+
 #
 # Context
 # defines the interface of interest to clients
@@ -76,6 +90,7 @@ if __name__ == '__main__':
     MyController = Controller()
     DisplayProfile = ConcreteStateProfile()
     DisplayLogin = ConcreteStateLogin()
+    DisplayAddCourse=ConcreteStateAddCourse()
     context = Context()
     s1 = Subscriber()
     s1.addSubName("Tom")
@@ -96,6 +111,11 @@ if __name__ == '__main__':
             context.setState(DisplayProfile)
             context.request()
             print("-------------------------------Setting state to display Profile Page ---------------------")
+
+        if state =="AddCourse":
+            context.setState(DisplayAddCourse)
+            context.request()
+            print("-------------------------------Setting state to display AddCourse Page ---------------------")
 
 
 
