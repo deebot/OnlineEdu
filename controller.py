@@ -16,6 +16,11 @@ class Controller:
         self.model.pub.add_newsletter("Tech")
         self.model.pub.register(newsletter="Tech", who=s1)
         self.model.recogniseButton(caption)
+        if caption == "AddCourse":
+            print(f' Course Page {caption} registered')
+
+
+
 
 
 

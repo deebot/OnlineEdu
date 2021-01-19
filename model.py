@@ -105,11 +105,15 @@ class Model(Subscriber,Publisher):
         self.dataLogger=DataLogger
         self.sub = Subscriber()
         self.pub = Publisher()
+        self.SubjectsEnrolled=[]
+        self.streamingServer="Amazon"
+
 
 
     def recogniseButton(self, ButtonID):
         if ButtonID == 'buttonSubmit':
             self.pub.add_newsletter("Tech-")
+            #self.pub.add_newsletter()
 
             print(f' In Model button {ButtonID} registered')
             db = self.dataLogger()
@@ -120,6 +124,28 @@ class Model(Subscriber,Publisher):
                 self.pub.dispatch(newsletter="Tech", message="Profile")
             else:
                 self.pub.dispatch(newsletter="Tech", message="Login")
+
+        if ButtonID == 'buttonAddCourse':
+            self.pub.dispatch(newsletter="Tech", message="AddCourse")
+
+        if ButtonID == "buttonSelect":
+            pass
+
+        if ButtonID == "videoStream":
+            #Default Behaviour
+            if self.streamingServer=="Amazon":
+                target = AmazonCDNTarget()
+                client_code(target)
+            #When Godady is required
+            elif self.streamingServer=="GoDady":
+                adapter = Adapter()
+                client_code(adapter)
+
+
+
+    def client_code(target: "Target"):
+        print(target.request())
+
 
 
 class SingletonDecorator(object):
@@ -167,8 +193,26 @@ class DataLogger(object):
         pass
 
     def retriveUser(self):
-        return "found"
+        return "notfound"
 
+class AmazonCDNTarget:
+    def __init__(self):
+        pass
+    def request(self):
+        return "Target: The default target's behavior."
+
+
+class GodadyAdaptee:
+    def specific_request(self):
+        return ".eetpadA eht fo roivaheb laicepS"
+
+
+class Adapter(AmazonCDNTarget, GodadyAdaptee):
+    def __init__(self):
+        AmazonCDNTarget.__init__(self)
+        GodadyAdaptee.__init__(self)
+    def request(self):
+        return f"Adapter: (TRANSLATED) {self.specific_request()[::-1]}"
 
 if __name__== '__main__':
     pass
