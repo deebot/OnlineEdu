@@ -1,5 +1,13 @@
 
+"""**
+ * Author:    Deepankar Maithani
+ * Created:   1.1.2020
+ *
+ * (c) Copyright by Deepankar
+ *This code generates the User Interface  for the app.
+ **/"""
 
+""" Component Abstract class. All componenets and composite view inherits form it"""
 class Component():
 
     def __init__(self, *args, **kw):
@@ -17,11 +25,12 @@ class Component():
         pass
 
 
-#
+"""
 # Composite
 # defines behavior of the components having children
 # and store child components
 #
+"""
 class Composite(Component):
     def __init__(self):
         Component.__init__(self)
@@ -117,7 +126,7 @@ class View(Composite):
 
     def attachButtonClick(self,x):
         self.controller.onButtonClick(x.operation())
-
+    #This function displays the Login Screen in the console
     def loginPage(self):
         print("-----------------------Composing Login Screen ---------------------------------")
         self.LoginFrame.add(LeafEntry("UserID"))
@@ -130,7 +139,7 @@ class View(Composite):
         simulate_ButtonPress= str(input("Press Submit Button (y/n)"))
         if simulate_ButtonPress =="y":
             self.controller.onButtonClick(self.LoginFrame.operation(2))
-
+    #This function displays the ProfilepAGE
     def profilePage(self):
        # ProfileFrame =Composite()
         print("------------------------Composing Profile Screen-----------------------------")
@@ -142,7 +151,7 @@ class View(Composite):
         if simulate_Addcourse == "y":
             print(self.ProfileFrame.operation(2))
             self.controller.onButtonClick(self.ProfileFrame.operation(2))
-
+    #This function generates the COurses page in the console
     def CoursesPage(self):
 
         self.AddCoursesFrame.add(LeafBanner("Subject1"))

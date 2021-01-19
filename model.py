@@ -1,4 +1,15 @@
+"""**
+ * Author:    Deepankar Maithani
+ * Created:   1.1.2020
+ *
+ * (c) Copyright by Deepankar
+ *This code generates  has the Business logic
+ **/"""
+
 import sqlite3
+
+
+"""OBSERVER PATTERN IMPLEMENTATION"""
 class Subscriber(object):
     """It's the Observer object. It receives messages from the Observable."""
 
@@ -94,7 +105,7 @@ class Publisher(object):
         self.subscriptions[newsletter] = dict()
 
 
-class Model(Subscriber,Publisher):
+class Model():
 
     def __init__(self):
         Subscriber.__init__(self)
@@ -147,7 +158,7 @@ class Model(Subscriber,Publisher):
         print(target.request())
 
 
-
+"""SINGLETON PATTERN IMPLEMENTATION"""
 class SingletonDecorator(object):
     def __init__(self, klass):
         self.klass = klass
@@ -194,6 +205,8 @@ class DataLogger(object):
 
     def retriveUser(self):
         return "notfound"
+
+"""ADAPTOR PATTERN IMPLEMENTATION"""
 
 class AmazonCDNTarget:
     def __init__(self):

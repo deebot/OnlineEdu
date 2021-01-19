@@ -1,17 +1,23 @@
+"""**
+ * Author:    Deepankar Maithani
+ * Created:   1.1.2020
+ *
+ * (c) Copyright by Deepankar
+ *This code controls the information flow between the model and View
+ **/"""
+
+
 from model import Model
 from model import Subscriber
 from view import View
 from model import Publisher
-
-
-
 class Controller:
     def __init__(self):
         self.model=Model()
         self.view=View(self)
         print("Controller Class initiated")
 
-
+#Registers button clicks and passes to Model
     def onButtonClick(self,caption):
         if caption =="buttonSubmit":
             self.model.pub.add_newsletter("Tech")
