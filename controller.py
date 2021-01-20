@@ -19,16 +19,22 @@ class Controller:
 
 #Registers button clicks and passes to Model
     def onButtonClick(self,caption):
-        if caption =="buttonSubmit":
+        self.model.pub.add_newsletter("Tech")
+        self.model.pub.register(newsletter="Tech", who=s1)
+        self.model.recogniseButton(caption)
+        """if caption =="buttonSubmit":
             self.model.pub.add_newsletter("Tech")
             self.model.pub.register(newsletter="Tech", who=s1)
             self.model.recogniseButton(caption)
         if caption == "buttonAddCourse":
+            self.model.pub.add_newsletter("Tech")
+            self.model.pub.register(newsletter="Tech", who=s1)
             print(f' Course Page {caption} registered')
             self.model.recogniseButton(caption)
         if caption == "buttonSelect":
             print(f' Course Page {caption} registered')
-            self.model.SubjectsEnrolled.append()
+            self.model.recogniseButton(caption)
+            #self.model.SubjectsEnrolled.append()"""
 
 
 
@@ -116,12 +122,14 @@ if __name__ == '__main__':
         if state =="Profile":
             context.setState(DisplayProfile)
             context.request()
+            state = s1.get_data()
             print("-------------------------------Setting state to display Profile Page ---------------------")
 
         if state =="AddCourse":
             context.setState(DisplayAddCourse)
             context.request()
             print("-------------------------------Setting state to display AddCourse Page ---------------------")
+            state = s1.get_data()
 
 
 

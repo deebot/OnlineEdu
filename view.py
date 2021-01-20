@@ -122,7 +122,7 @@ class View(Composite):
         self.LoginFrame=Composite()
         self.ProfileFrame=Composite()
         self.AddCoursesFrame=Composite()
-        self.Courses=[]
+        self.Courses=["APP_Design","Mathematics","Compiler"]
 
     def attachButtonClick(self,x):
         self.controller.onButtonClick(x.operation())
@@ -157,6 +157,9 @@ class View(Composite):
         self.AddCoursesFrame.add(LeafBanner("Subject1"))
         self.AddCoursesFrame.add(LeafBanner("Subject2"))
         self.AddCoursesFrame.add(LeafButton("Select"))
-        print("---------Select One --------- ")
-        print("Subject3")
-        print("Subject4")
+        print("---------Inside CourseSelection Page--------- ")
+
+        simulate_Addcourse = str(input("Enter CourseName"))
+        self.Courses.append(simulate_Addcourse)
+        self.controller.onButtonClick(self.AddCoursesFrame.operation(2))
+

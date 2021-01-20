@@ -140,7 +140,7 @@ class Model():
             self.pub.dispatch(newsletter="Tech", message="AddCourse")
 
         if ButtonID == "buttonSelect":
-            pass
+            self.pub.dispatch(newsletter="Tech", message="Profile")
 
         if ButtonID == "videoStream":
             #Default Behaviour
@@ -204,7 +204,7 @@ class DataLogger(object):
         pass
 
     def retriveUser(self):
-        return "notfound"
+        return "found"
 
 """ADAPTOR PATTERN IMPLEMENTATION"""
 
